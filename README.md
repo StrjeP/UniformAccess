@@ -69,16 +69,26 @@ Similar a source could be partitioned, be that native or by partitioning instruc
 A claim is a document which contains information relating to the dataset or the work to produce a dataset. Be this a simple bulk copy report or the claims about the content. The claim is defined by the producer, so it can vary between systems. It could be a fully structured document with a schema and precise meaning or an unstructured document. The specifics of a claim would be assigned an identity to allow the content to be comprehended.
 
 ### Idiom: Identity
-To allow the various things to be identifiable there should be an identity, this identity could be an absolute or qualified. For a dataset the logical meaning at a point in time, or a manifestation of it
+To allow the various things to be identifiable there should be an identity, this identity could be an absolute or qualified. For a dataset the logical meaning at a point in time, or a manifestation of it.
+In a deployment of a solution, there may be instances of the database in different sites, each with different character, in such data in Site A may be the current master, and in Sites B the data is actively replicated (with a latency estimate of seconds), whilst Site C could be from the last backup (with a latency of hours). Thus Identity can be both strong dataset of x with schema y or weaker the dataset as of last full backup. It is also possible that there could be a technology change, e.g. dataset from Postgres is written to S3 bucket in AVRO as of time x.
+The identifier is for both locating a thing and gaining insight into the provenance and other characteristics (which with a Metadata open model would permit extension)
+
+### Idiom: Locator
+Similar to discovery but without the baggage, the idea is a locator can be from config,
+context or service. Consider a map printed at a point in time (config), though the
+destination has moved, the caller could be redirected or contact the publisher for an
+updated map. This allows offline routing and incremental updates, without a single
+point of failure. In the locator path it is possible to respond or redirect.
+The locator could orchestrate activities to assist in fulfilling the request, this could theoretically be to refresh a backup, or take a copy of a smaller side of a join to the data location of the larger dataset, potentially storing it in an optimised form.
 
 ### Idiom: Store on Demand
-To allow a system to be fully flexible, the ability to store on demand is important. This is akin to writing a file, to be able
+To allow a system to be fully flexible, the ability to store on demand is important. This is akin to writing a file, to be able to on demand create a location into which data can be stored. The simplest of these could be to cache the results for a period of time. This store on demand could be driven by the user's instructions or the services in their processing (snapshots or save points). The critical part of this idiom is these are managed consistently, thus allowing restart and sharing across processing platforms.
 
 ### Idiom: Instructions (to guide or instruct)
 This is very simple, the idea of instructions, in the real-world this is pretty obvious, in a system this is less well understood. instructions are similar to "advice" and "commands".
 
 ### Idiom: Consistent Governance
-With the various things, uniquely identifiable it is possible to introduce a consistent governance model, this isn't singularity, not a single global solution, but a consistent approach to governae.
+With the various things, uniquely identifiable it is possible to introduce a consistent governance model, this isn't singularity, not a single global solution, but a consistent approach to governance.
 
 ### Idiom: Request Instructions
 Very simply, request instructions are to adjust how to data is sourced, processed an potentially managed. These could be instructions
@@ -89,14 +99,6 @@ for the data to be no more than N days stale.
 ### Idiom: Response Instruction
 ### Idiom: Indirection through results or instruction
 Simple sketch, the response says, send "this" query to this database, then on the boundary x, take the offsets from the boundary and subscribe to the stream from this point.
-
-### Idiom: Locator
-Similar to discovery but without the baggage, the idea is a locator can be from config,
-context or service. Consider a map printed at a point in time (config), though the
-destination has moved, the caller could be redirected or contact the publisher for an
-updated map. This allows offline routing and incremental updates, without a single
-point of failure. In the locator path it is possible to respond or redirect.
-The locator could orchestrate activities to assist in fulfilling the request.
 
 ### Idiom: View Specifications
 This is an approach for versioned data, instead of a simple linear versioning, this could be

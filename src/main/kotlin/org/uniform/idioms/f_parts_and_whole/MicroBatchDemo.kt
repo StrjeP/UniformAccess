@@ -25,7 +25,7 @@ class MicroBatchDemo : EventConsumer<Batch<XnY>> {
     }
 
     fun run() {
-        val s = BatchingDataEventSource(StreamDataEventSource())
+        val s = BatchingDataEventSource(StreamDataEventSource(), 6)
         s.request(UnBoundedRequest(20.0), this)
     }
     companion object {

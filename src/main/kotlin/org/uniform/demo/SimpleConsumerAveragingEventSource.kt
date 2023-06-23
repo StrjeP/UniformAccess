@@ -5,7 +5,7 @@ import org.uniform.demo.model.*
 class SimpleConsumerAveragingEventSource : EventConsumer<XnY>, DataEventSource<XnYnC>{
     private lateinit var consumer: EventConsumer<XnYnC>
 
-    var inscopeValues = mutableListOf<XnY>()
+    private var inscopeValues = mutableListOf<XnY>()
     fun onData(d: XnY) {
         if (inscopeValues.isEmpty()) {
             inscopeValues = mutableListOf(d)

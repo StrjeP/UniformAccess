@@ -2,7 +2,7 @@ package org.uniform.demo
 
 import org.uniform.demo.model.*
 
-class TransformingDataEventSource(val underlying: DataEventSource<XnY>) : EventConsumer<XnY>, DataEventSource<String> {
+class TransformingDataEventSource(private val underlying: DataEventSource<XnY>) : EventConsumer<XnY>, DataEventSource<String> {
     private lateinit var consumer: EventConsumer<String>
     private lateinit var transformer: (a: XnY) -> String
     private val sleepDuration = 0L

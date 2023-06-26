@@ -19,3 +19,6 @@ data class BoundedRequest(val start: Double, val end: Double) : Request
 data class UnBoundedRequest(val start: Double) : Request
 data class TransformRequest<I, O>(val request: Request, val transformer: (i : I) -> O): Request
 
+
+data class SomeStringRequest(val request: String) : Request
+data class JsonRequest(val start:Double, val end: Double)

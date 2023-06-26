@@ -2,7 +2,7 @@ package org.uniform.demo
 
 import org.uniform.demo.model.*
 
-class TransformingDataEventSource(private val underlying: DataEventSource<XnY>) : EventConsumer<XnY>, DataEventSource<String> {
+class ResponseTransformingDataEventSource(private val underlying: DataEventSource<XnY>) : EventConsumer<XnY>, DataEventSource<String> {
     private lateinit var consumer: EventConsumer<String>
     private lateinit var transformer: (a: XnY) -> String
     private val sleepDuration = 0L
@@ -12,7 +12,6 @@ class TransformingDataEventSource(private val underlying: DataEventSource<XnY>) 
         var transformRequest = request as TransformRequest<XnY, String>
         this.transformer = transformRequest.transformer
         this.underlying.request(transformRequest.request, this as EventConsumer<XnY>)
-
     }
 
     override fun onEvent(dataEvent: Event<XnY>) {

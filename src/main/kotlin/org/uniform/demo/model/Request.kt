@@ -22,3 +22,6 @@ data class TransformRequest<I, O>(val request: Request, val transformer: (i : I)
 
 data class SomeStringRequest(val request: String) : Request
 data class JsonRequest(val start:Double, val end: Double)
+
+
+data class SimpleDataEventSourceRequest(val type: String, val min: Double, val max: Double)

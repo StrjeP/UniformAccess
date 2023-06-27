@@ -15,7 +15,7 @@ class StreamDataEventSource : DataEventSource<XnY> {
         this.consumer = consumer
 
         val (start, end) = when (request) {
-            is BoundedRequest -> Pair(request.start, request.end)
+            is BoundedRequest -> Pair(request.start, request.end.coerceAtMost(streamTerminatorX))
             is UnBoundedRequest -> Pair(request.start, streamTerminatorX)
             else -> Pair(0.0, streamTerminatorX)
         }

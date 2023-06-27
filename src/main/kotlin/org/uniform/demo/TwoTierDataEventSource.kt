@@ -2,7 +2,7 @@ package org.uniform.demo
 
 import org.uniform.demo.model.*
 
-class TwoTierDataEventSource(val first: DataEventSource<XnY>, val second: DataEventSource<XnY>) : EventConsumer<XnY>,
+class TwoTierDataEventSource(private val first: DataEventSource<XnY>, private val second: DataEventSource<XnY>) : EventConsumer<XnY>,
     DataEventSource<XnY> {
     private lateinit var consumer: EventConsumer<XnY>
     override fun request(request: Request, consumer: EventConsumer<XnY>) {

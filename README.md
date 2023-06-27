@@ -21,6 +21,7 @@ Will return to show the write side of uniform access, this needs "character" to 
 explained, where a source/sink can offer certain capabilities, ah probably needs quite a bit to
 explain these concepts
 
+[Motivation](Motivation.md)
 
 (using letters here to allow )
 ### Idiom A: Uniform Computation and Storage

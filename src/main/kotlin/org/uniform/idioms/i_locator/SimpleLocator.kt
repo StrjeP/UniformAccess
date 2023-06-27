@@ -1,4 +1,4 @@
-package org.uniform.idioms.I_locator
+package org.uniform.idioms.i_locator
 
 import org.uniform.demo.*
 import org.uniform.demo.model.DataEventSource

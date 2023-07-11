@@ -1,0 +1,36 @@
+{
+  "meta": {
+    "type": {
+      "id": "ua_req",
+      "ver": "1.0"
+    }
+  },
+  "context": {
+    "meta": {
+      "type": {
+        "id": "ui_context",
+        "ver": "1.0"
+      }
+    },
+    "environment": "development_1",
+    "expectation": "run immediately",
+    "authority": {
+      "userIdentity": "signedJWT",
+      "ephemeral": "signJWT with escalated authority or impersonation link back to specific"
+    },
+    "activity": {
+      "state": "OrderHistory database is accessible",
+      "task": {
+        "meta": {
+          "type": {
+            "id": "task_sql_connection",
+            "ver": "1.0"
+          }
+        },
+        "type": "SQLPooledConnection",
+        "schema": "someuser"
+      },
+      "outcome": "JDBC Connection"
+    }
+  }
+}
